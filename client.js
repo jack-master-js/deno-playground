@@ -4,7 +4,8 @@ console.log(`connected to ${JSON.stringify(conn.remoteAddr)}`);
 const user = new User();
 const writer = conn.writable.getWriter();
 
-user.setName("JMJ");
+user.setFirstName("John");
+user.setLastName("Smith");
 user.setAge(30);
 
 setInterval(async () => {

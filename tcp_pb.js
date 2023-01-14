@@ -69,8 +69,9 @@ proto.User.prototype.toObject = function(opt_includeInstance) {
  */
 proto.User.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    age: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    firstName: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    lastName: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    age: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -109,9 +110,13 @@ proto.User.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setName(value);
+      msg.setFirstName(value);
       break;
     case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setLastName(value);
+      break;
+    case 3:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setAge(value);
       break;
@@ -144,17 +149,24 @@ proto.User.prototype.serializeBinary = function() {
  */
 proto.User.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getName();
+  f = message.getFirstName();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getAge();
-  if (f !== 0) {
-    writer.writeInt32(
+  f = message.getLastName();
+  if (f.length > 0) {
+    writer.writeString(
       2,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 3));
+  if (f != null) {
+    writer.writeInt32(
+      3,
       f
     );
   }
@@ -162,10 +174,10 @@ proto.User.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional string name = 1;
+ * optional string first_name = 1;
  * @return {string}
  */
-proto.User.prototype.getName = function() {
+proto.User.prototype.getFirstName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -174,17 +186,35 @@ proto.User.prototype.getName = function() {
  * @param {string} value
  * @return {!proto.User} returns this
  */
-proto.User.prototype.setName = function(value) {
+proto.User.prototype.setFirstName = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional int32 age = 2;
+ * optional string last_name = 2;
+ * @return {string}
+ */
+proto.User.prototype.getLastName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.setLastName = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional int32 age = 3;
  * @return {number}
  */
 proto.User.prototype.getAge = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
@@ -193,7 +223,25 @@ proto.User.prototype.getAge = function() {
  * @return {!proto.User} returns this
  */
 proto.User.prototype.setAge = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.clearAge = function() {
+  return jspb.Message.setField(this, 3, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.User.prototype.hasAge = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
